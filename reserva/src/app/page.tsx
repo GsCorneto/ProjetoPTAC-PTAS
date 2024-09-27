@@ -3,6 +3,9 @@
 import styles from "./page.module.css";
 import { useState } from "react";
 import { useRouter } from 'next/navigation'
+import Button from "./components/Button";
+
+
 
 export default function Home() {
   const [user, setUser] = useState(true);
@@ -11,20 +14,23 @@ export default function Home() {
   if(user){
     return (
       <div>
-        
        <div>
-            <label>E-mail</label>
-            <input type ="text" name="email" id="email"/>
+          <label>E-mail</label>
+          <input type ="text" name="email" id="email"/>
        </div>
 
        <div>
-            <label>Nome</label>
-            <input type="text" name="senha" id="pass"/>
+          <label>Senha</label>
+          <input type="password" name="senha" id="pass"/>
        </div>
-       <a href="/"></a>
-        <button onClick={() => 
-          setUser(false)
-          }>Efetuar Login</button>
+
+          <Button title =" Zezé" funcao = {() => setUser(false)}/>
+           Lelek
+          
+
+          <Button title = "almofada" funcao ={() => route.push('/Home')}/>
+            Perfil
+        
       </div>
      );
    } 
@@ -33,6 +39,10 @@ export default function Home() {
    return (
     <div>
       <h1>Usuário não existente!</h1>
+      <Button title = "Volta" funcao={() => setUser(true)}/>
+
+      <Button title ="Ratoeira" funcao={() => route.push('/Home')}/>
+  
     </div>
    );
  }
