@@ -1,6 +1,6 @@
 'use client'
 import { useState } from "react";
-import Reservas from "../interfaces/reservas";
+import Reservas from "./src/app/interfaces/reservas";
 
 const InterReserva = () =>{
     // const [reserva, setReserva] = useState<Reservas>({
