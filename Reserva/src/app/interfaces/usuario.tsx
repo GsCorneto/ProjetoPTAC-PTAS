@@ -1,5 +1,5 @@
 interface Usuario{
-    id: number,
+    id?: number,
     nome: string,
     email: string,
     passwd: string,

@@ -4,7 +4,9 @@ type ButtonProp ={
 }
 
 const Button : React.FC<ButtonProp> = ({title, funcao}) => {
-    return (<button title={title} onClick={funcao}></button>)
+    return (
+        <button onClick={funcao}>{title}</button>
+    )
 }
 
 export default Button;
