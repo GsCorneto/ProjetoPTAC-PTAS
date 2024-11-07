@@ -21,12 +21,12 @@ const PCadastro = () => {
         console.log(usuario)
     }
 
-    const alterarTipo = (novoTipo: ("cliente" | "adm")) => {
-        setUsuario((vAnteriores) => ({
-            ...vAnteriores,
-            tipo: novoTipo
-        }))
-    }
+    // const alterarTipo = (novoTipo: ("cliente" | "adm")) => {
+    //     setUsuario((vAnteriores) => ({
+    //         ...vAnteriores,
+    //         tipo: novoTipo
+    //     }))
+    // }
 
     const alterarEmail = (novaEmail: string) => {
         setUsuario((vAnteriores) => ({
@@ -42,7 +42,7 @@ const PCadastro = () => {
         }))
     }
 
-    const router = useRouter()
+    const router = useRouter();
 
     return(
         <div>
@@ -80,7 +80,7 @@ const PCadastro = () => {
                         />
                 </div>
 
-                <button title="Cadastrar" type="submit"/>
+                <Button title="Cadastrar" funcao= {() => }/>
             </form>
         </div>
     )

@@ -5,7 +5,7 @@ type ButtonProp ={
 
 const Button : React.FC<ButtonProp> = ({title, funcao}) => {
     return (
-        <button onClick={funcao}>{title}</button>
+        <button  className="" onClick={funcao}>{title}</button>
     )
 }
 

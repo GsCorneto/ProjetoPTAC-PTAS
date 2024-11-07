@@ -1,18 +1,24 @@
 'use client'
 
-import styles from "./page.module.css";
-import { useEffect, useState } from "react";
+import styles from "../";
+import { useEffect, useState, FormEvent } from "react";
 import { useRouter } from 'next/navigation'
 import Button from "../components/Button";
-import Usuario from "../interfaces/usuario";
-import Reservas from "../interfaces/reservas";
-import Mesas from "../interfaces/mesas";
-
-
+import { apiURL } from "../config";
+import { setCookie, parseCookies } from "nookies";
 
 export default function Login() {
-  const [user, setUser] = useState(true);
+  const [email, setEmail] = useState("");
+  const [passwd, setPass] = useState("");
   const route = useRouter();
+
+  // const response = await fetch(`${apiURL}/auth/login`, {
+  //   method : 'POST',
+  //   headers :{
+  //     'Content-type' : 'application/json'
+  //   },
+  //   body: 
+  // })
 
 // const teste = [1,2,3,4]
 // const result = teste.find((item) => item = 1)
@@ -47,17 +53,25 @@ export default function Login() {
       <div>
        <div>
           <label>E-mail</label>
-          <input type ="text" name="email" id="email"/>
+          <input 
+          type ="text" 
+          name="email" 
+          id="email"
+          />
        </div>
 
        <div>
           <label>Senha</label>
-          <input type="password" name="senha" id="pass"/>
+          <input 
+          type="password" 
+          name="senha" 
+          id="pass"
+          />
        </div>
 
           <Button title ="Realizar Login" funcao = {() => setUser(false)}/>
            
-          <Button title = "Efetuar Cadastro" funcao ={() => route.push('/Home')}/>
+          <Button title = "Efetuar Cadastro" funcao ={() => route.push('/Cadastrar')}/>
              
       </div>
      );
