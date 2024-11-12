@@ -5,7 +5,7 @@ import Usuario from "../interfaces/usuario";
 const InterUsuario = () => {
     const [usuario, setUsuario] = useState<Usuario>({
         id: 1,
-        nome: 'jose',
+        nome: 'Adalberto',
         email: 'jose@email.com',
         passwd: 'jose1234',
         tipo: 'cliente'
