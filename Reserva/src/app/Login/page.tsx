@@ -1,6 +1,6 @@
 'use client'
 
-import styles from "../";
+// import styles from "../";
 import { useEffect, useState, FormEvent } from "react";
 import { useRouter } from 'next/navigation'
 import Button from "../components/Button";
@@ -10,6 +10,7 @@ import { setCookie, parseCookies } from "nookies";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [passwd, setPass] = useState("");
+  const [error, setError] = useState("")
   const route = useRouter();
 
   // const response = await fetch(`${apiURL}/auth/login`, {
@@ -43,11 +44,37 @@ export default function Login() {
 //   }
 
   useEffect(() => {
-    const userLog = localStorage.getItem('usuario');
-    if(userLog){
-        route.push('')
+    const {'reservaToken' : token} = parseCookies()
+    if(token){
+        route.push('/')
+        console.log("Redirecionado para a Home")
     }
-  }, []);
+  }, [route]);
+
+    const handleSubmmit = async (e: FormEvent) =>{
+      e.preventDefault();
+      try{
+        const response = await fetch(`${apiURL}/auth/login`, {
+          method: 'POST',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify({email, passwd})
+        });
+        if(response){
+          const data = await response.json();
+          const {erro, mensagem, token} = data;
+          if(erro){
+            setError(mensagem)
+          }else{
+            setCookie(undefined, 'reservaToken', token, {
+              maxAge: 60*60*1
+            })
+            route.push('/')
+          }
+        }
+      }catch(erro){
+        console.error('Ocorreu um erro ao efetuar a requisição')
+      }
+    }
 
     return (
       <div>
