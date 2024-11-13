@@ -62,8 +62,8 @@ export default function Login() {
         });
         if(response){
           const data = await response.json();
-          const {erro, mensagem, token} = data;
-          if(erro){
+          const {error, mensagem, token} = data;
+          if(error){
             setError(mensagem)
           }else{
             setCookie(undefined, 'reservaToken', token, {
@@ -72,7 +72,7 @@ export default function Login() {
             route.push('/')
           }
         }
-      }catch(erro){
+      }catch(error){
         console.error('Ocorreu um erro ao efetuar a requisição')
       }
     }
@@ -106,7 +106,7 @@ export default function Login() {
 
           <button  className="buttonlog" title ="Realizar Login" onClick={handleSubmmit}>Login</button>
            </div>
-          <Button title = "Efetuar cadastro" funcao ={() => route.push('/Cadastrar')}/>
+          <button className="botaorota" title ="Efetuar cadastro" onClick ={() => route.push('/Cadastrar')}>Efetuar Cadastro</button>
              
       </div>
      );

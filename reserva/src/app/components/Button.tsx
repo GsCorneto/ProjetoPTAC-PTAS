@@ -1,3 +1,4 @@
+import "../globals.css"
 type ButtonProp ={
     title: string,
     funcao : () => void,
@@ -5,7 +6,7 @@ type ButtonProp ={
 
 const Button : React.FC<ButtonProp> = ({title, funcao}) => {
     return (
-        <button onClick={funcao}>{title}</button>
+        <button className="botaorota" onClick={funcao}>{title}</button>
     )
 }
 
