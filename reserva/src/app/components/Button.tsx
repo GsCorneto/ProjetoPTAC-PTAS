@@ -1,11 +1,11 @@
 type ButtonProp ={
     title: string,
-    funcao : () => void
+    funcao : () => void,
 }
 
 const Button : React.FC<ButtonProp> = ({title, funcao}) => {
     return (
-        <button  className="" onClick={funcao}>{title}</button>
+        <button onClick={funcao}>{title}</button>
     )
 }
 

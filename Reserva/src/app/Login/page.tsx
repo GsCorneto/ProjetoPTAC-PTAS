@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import Button from "../components/Button";
 import { apiURL } from "../config";
 import { setCookie, parseCookies } from "nookies";
+import "../globals.css"
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -77,9 +78,10 @@ export default function Login() {
     }
 
     return (
-      <div>
-       <div>
-          <label>E-mail</label>
+      <div className="login-main">
+       <div className="flogin">
+        <div className="inputlog">
+          <label htmlFor="email">E-mail</label>
           <input 
           type ="text" 
           name="email" 
@@ -90,7 +92,7 @@ export default function Login() {
           />
        </div>
 
-       <div>
+       <div className="inputlog">
           <label>Senha</label>
           <input 
           type="password" 
@@ -102,8 +104,8 @@ export default function Login() {
           />
        </div>
 
-          <button  className="" title ="Realizar Login" onClick={handleSubmmit}>Login</button>
-           
+          <button  className="buttonlog" title ="Realizar Login" onClick={handleSubmmit}>Login</button>
+           </div>
           <Button title = "Efetuar cadastro" funcao ={() => route.push('/Cadastrar')}/>
              
       </div>

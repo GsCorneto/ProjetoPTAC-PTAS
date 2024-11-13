@@ -8,6 +8,7 @@ import Button from "../components/Button"
 import Usuario from "../interfaces/usuario"
 import { apiURL } from "../config";
 import { setCookie, parseCookies } from "nookies";
+import "../globals.css"
 
 const PCadastro = () => {
     const [nome, setNome] = useState("");
@@ -59,14 +60,10 @@ const PCadastro = () => {
           console.error('Ocorreu um erro ao efetuar a requisição')
         }
       }
-
-    
-
     return(
         <div>
             <form>
                 <h1>
-
                 </h1>
                 <div>
                     <label htmlFor="nome">Nome: </label>
