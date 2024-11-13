@@ -10,21 +10,14 @@ import { apiURL } from "../config";
 import { setCookie, parseCookies } from "nookies";
 
 const PCadastro = () => {
-    const [usuario, setUsuario] = useState<Usuario>({
-        nome: '',
-        email: '',
-        passwd: '',
-        tipo: 'cliente'
-    })
+    const [nome, setNome] = useState("");
+    const [email, setEmail] = useState("");
+    const [passwd, setPass] = useState("");
     const [error, setError] = useState("")
     const route = useRouter();
 
     const alterarNome = (novoNome: string) => {
-        setUsuario((vAnteriores) => ({
-            ...vAnteriores,
-            nome: novoNome
-        }))
-        console.log(usuario)
+        setNome(novoNome)
     }
 
     // const alterarTipo = (novoTipo: ("cliente" | "adm")) => {
@@ -34,18 +27,12 @@ const PCadastro = () => {
     //     }))
     // }
 
-    const alterarEmail = (novaEmail: string) => {
-        setUsuario((vAnteriores) => ({
-            ...vAnteriores,
-            email: novaEmail
-        }))
+    const alterarPass = (novaPass: string) => {
+        setNome(novaPass)
     }
 
-    const alterarPasswd = (novaPasswd: string) => {
-        setUsuario((vAnteriores) => ({
-            ...vAnteriores,
-            passwd: novaPasswd
-        }))
+    const alterarEmail = (novoEmail: string) => {
+        setNome(novoEmail)
     }
 
     const handleSubmmit = async (e: FormEvent) =>{
@@ -54,7 +41,7 @@ const PCadastro = () => {
           const response = await fetch(`${apiURL}/auth/cadastro`, {
             method: 'POST',
             headers: {'Content-Type':'application/json'},
-            body: JSON.stringify({})
+            body: JSON.stringify({nome, email, passwd})
           });
           if(response){
             const data = await response.json();
@@ -86,7 +73,8 @@ const PCadastro = () => {
                     <input 
                         type="text"
                         id='nome'
-                        value={usuario.nome}
+                        placeholder="Insira Nome Completo"
+                        value={nome}
                         onChange={(e) => alterarNome(e.target.value)}
                         />
                 </div>
@@ -96,7 +84,8 @@ const PCadastro = () => {
                     <input
                         type="email"
                         id='email'
-                        value={usuario.email}
+                        placeholder="Insira um Email"
+                        value={email}
                         onChange={(e) => alterarEmail(e.target.value)}
                         />
                 </div>
@@ -106,12 +95,13 @@ const PCadastro = () => {
                     <input
                         type="password"
                         id='passwd'
-                        value={usuario.passwd}
-                        onChange={(e) => alterarPasswd(e.target.value)}
+                        placeholder="Insira Senha"
+                        value={passwd}
+                        onChange={(e) => alterarPass(e.target.value)}
                         />
                 </div>
 
-                <button onClick={handleSubmit} ></button>
+                <button onClick={handleSubmmit}></button>
             </form>
         </div>
     )
