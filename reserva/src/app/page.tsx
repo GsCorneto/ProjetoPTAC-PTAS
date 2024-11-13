@@ -4,7 +4,7 @@ import styles from "./page.module.css";
 import { useState } from "react";
 import { useRouter } from 'next/navigation'
 import Button from "./components/Button";
-
+import "./globals.css"
 
 export default function Home(){
   const router = useRouter()

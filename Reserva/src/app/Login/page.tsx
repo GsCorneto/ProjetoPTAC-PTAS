@@ -84,6 +84,9 @@ export default function Login() {
           type ="text" 
           name="email" 
           id="email"
+          placeholder="Digite seu e-mail"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           />
        </div>
 
@@ -93,12 +96,15 @@ export default function Login() {
           type="password" 
           name="senha" 
           id="pass"
+          placeholder="Digite sua senha"
+          value={passwd}
+          onChange={(e) => setPass(e.target.value)}
           />
        </div>
 
-          <Button title ="Realizar Login" funcao = {() => setUser(false)}/>
+          <button  className="" title ="Realizar Login" onClick={handleSubmmit}>Login</button>
            
-          <Button title = "Efetuar Cadastro" funcao ={() => route.push('/Cadastrar')}/>
+          <Button title = "Efetuar cadastro" funcao ={() => route.push('/Cadastrar')}/>
              
       </div>
      );

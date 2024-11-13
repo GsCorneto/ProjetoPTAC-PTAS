@@ -2,10 +2,12 @@
 
 'use client'
 
-import { useState } from "react"
-import { useRouter } from "next/router"
+import { useEffect, useState, FormEvent } from "react";
+import { useRouter } from 'next/navigation'
 import Button from "../components/Button"
 import Usuario from "../interfaces/usuario"
+import { apiURL } from "../config";
+import { setCookie, parseCookies } from "nookies";
 
 const PCadastro = () => {
     const [usuario, setUsuario] = useState<Usuario>({
@@ -14,6 +16,8 @@ const PCadastro = () => {
         passwd: '',
         tipo: 'cliente'
     })
+    const [error, setError] = useState("")
+    const route = useRouter();
 
     const alterarNome = (novoNome: string) => {
         setUsuario((vAnteriores) => ({
@@ -44,7 +48,32 @@ const PCadastro = () => {
         }))
     }
 
-    const router = useRouter();
+    const handleSubmmit = async (e: FormEvent) =>{
+        e.preventDefault();
+        try{
+          const response = await fetch(`${apiURL}/auth/cadastro`, {
+            method: 'POST',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify({})
+          });
+          if(response){
+            const data = await response.json();
+            const {erro, mensagem, token} = data;
+            if(erro){
+              setError(mensagem)
+            }else{
+              setCookie(undefined, 'reservaToken', token, {
+                maxAge: 60*60*1
+              })
+              route.push('/')
+            }
+          }
+        }catch(erro){
+          console.error('Ocorreu um erro ao efetuar a requisição')
+        }
+      }
+
+    
 
     return(
         <div>
@@ -65,7 +94,7 @@ const PCadastro = () => {
                 <div>
                     <label htmlFor="email">Email: </label>
                     <input
-                        type="text"
+                        type="email"
                         id='email'
                         value={usuario.email}
                         onChange={(e) => alterarEmail(e.target.value)}
@@ -82,7 +111,7 @@ const PCadastro = () => {
                         />
                 </div>
 
-                <Button title="Cadastrar" funcao= {() => }/>
+                <button onClick={handleSubmit} ></button>
             </form>
         </div>
     )
