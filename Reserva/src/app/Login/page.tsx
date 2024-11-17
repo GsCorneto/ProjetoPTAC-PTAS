@@ -78,9 +78,9 @@ export default function Login() {
     }
 
     return (
-      <div className="login-main">
-       <div className="flogin">
-        <div className="inputlog">
+      <div className="main">
+       <div className="form">
+        <div className="input">
           <label htmlFor="email">E-mail</label>
           <input 
           type ="text" 
@@ -92,7 +92,7 @@ export default function Login() {
           />
        </div>
 
-       <div className="inputlog">
+       <div className="input">
           <label>Senha</label>
           <input 
           type="password" 
@@ -104,7 +104,7 @@ export default function Login() {
           />
        </div>
 
-          <button  className="buttonlog" title ="Realizar Login" onClick={handleSubmmit}>Login</button>
+          <button  className="button" title ="Realizar Login" onClick={handleSubmmit}>Login</button>
            </div>
           <button className="botaorota" title ="Efetuar cadastro" onClick ={() => route.push('/Cadastrar')}>Efetuar Cadastro</button>
              

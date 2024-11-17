@@ -11,9 +11,12 @@ export default function Home(){
      <div className="header">
         <h1>Página de Reservas</h1>
      </div>
-         <div>
+     
+         <div className="navbar">
             <button className="botaorota" title = "Efetuar Login" onClick ={() => router.push('/Login')}>Efetuar Login</button>
+            <button className="botaoreserva" title = "Efetuar Reserva" onClick ={() => router.push('/ReservarM')}>Reservar Mesa</button>
          </div> 
+     
     </div>
    );
 }

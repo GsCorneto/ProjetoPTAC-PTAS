@@ -2,15 +2,13 @@
 
 'use client'
 
-import { useEffect, useState, FormEvent } from "react";
+import { useState, FormEvent } from "react";
 import { useRouter } from 'next/navigation'
-import Button from "../components/Button"
-import Usuario from "../interfaces/usuario"
 import { apiURL } from "../config";
 import { setCookie, parseCookies } from "nookies";
 import "../globals.css"
 
-const PCadastro = () => {
+ export default function Cadastrar() {
     const [nome, setNome] = useState("");
     const [email, setEmail] = useState("");
     const [passwd, setPass] = useState("");
@@ -21,22 +19,16 @@ const PCadastro = () => {
         setNome(novoNome)
     }
 
-    // const alterarTipo = (novoTipo: ("cliente" | "adm")) => {
-    //     setUsuario((vAnteriores) => ({
-    //         ...vAnteriores,
-    //         tipo: novoTipo
-    //     }))
-    // }
 
     const alterarPass = (novaPass: string) => {
-        setNome(novaPass)
+        setPass(novaPass)
     }
 
     const alterarEmail = (novoEmail: string) => {
-        setNome(novoEmail)
+        setEmail(novoEmail)
     }
 
-    const handleSubmmit = async (e: FormEvent) =>{
+    const handleSubmit = async (e: FormEvent) =>{
         e.preventDefault();
         try{
           const response = await fetch(`${apiURL}/auth/cadastro`, {
@@ -44,9 +36,11 @@ const PCadastro = () => {
             headers: {'Content-Type':'application/json'},
             body: JSON.stringify({nome, email, passwd})
           });
+          console.log(response)
           if(response){
             const data = await response.json();
             const {erro, mensagem, token} = data;
+            console.log(data)
             if(erro){
               setError(mensagem)
             }else{
@@ -61,45 +55,45 @@ const PCadastro = () => {
         }
       }
     return(
-        <div>
-            <form>
-                <h1>
-                </h1>
-                <div>
-                    <label htmlFor="nome">Nome: </label>
-                    <input 
-                        type="text"
-                        id='nome'
-                        placeholder="Insira Nome Completo"
-                        value={nome}
-                        onChange={(e) => alterarNome(e.target.value)}
-                        />
-                </div>
+      <div className="main">
+        <div className="form">
+      <form onSubmit={handleSubmit}>
+          <div className="input">
+              <label htmlFor="nome">Nome: </label>
+              <input 
+                  type="text"
+                  id='nome'
+                  placeholder="Insira Nome Completo"
+                  value={nome}
+                  onChange={(e) => alterarNome(e.target.value)}
+                  />
+          </div>
 
-                <div>
-                    <label htmlFor="email">Email: </label>
-                    <input
-                        type="email"
-                        id='email'
-                        placeholder="Insira um Email"
-                        value={email}
-                        onChange={(e) => alterarEmail(e.target.value)}
-                        />
-                </div>
+          <div className="input">
+              <label htmlFor="email">Email: </label>
+              <input
+                  type="email"
+                  id='email'
+                  placeholder="Insira um Email"
+                  value={email}
+                  onChange={(e) => alterarEmail(e.target.value)}
+                  />
+          </div>
 
-                <div>
-                    <label htmlFor="passwd">Senha: </label>
-                    <input
-                        type="password"
-                        id='passwd'
-                        placeholder="Insira Senha"
-                        value={passwd}
-                        onChange={(e) => alterarPass(e.target.value)}
-                        />
-                </div>
-
-                <button onClick={handleSubmmit}></button>
-            </form>
-        </div>
+          <div className="input">
+              <label htmlFor="passwd">Senha: </label>
+              <input
+                  type="password"
+                  id='passwd'
+                  placeholder="Insira Senha"
+                  value={passwd}
+                  onChange={(e) => alterarPass(e.target.value)}
+                  />
+          </div>
+        
+          <button className="button" type="submit" onClick={handleSubmit}>Enviar</button>
+      </form>
+      </div>
+  </div>
     )
 } 
