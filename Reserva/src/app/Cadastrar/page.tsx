@@ -1,99 +1,122 @@
-
-
 'use client'
 
 import { useState, FormEvent } from "react";
 import { useRouter } from 'next/navigation'
 import { apiURL } from "../config";
-import { setCookie, parseCookies } from "nookies";
+import { setCookie } from "nookies";
 import "../globals.css"
 
- export default function Cadastrar() {
+export default function Cadastrar() {
     const [nome, setNome] = useState("");
     const [email, setEmail] = useState("");
-    const [passwd, setPass] = useState("");
-    const [error, setError] = useState("")
+    const [password, setPass] = useState("");
+    const [error, setError] = useState("");
+    const [successMessage, setSuccessMessage] = useState("");
     const route = useRouter();
 
     const alterarNome = (novoNome: string) => {
-        setNome(novoNome)
+        setNome(novoNome);
     }
 
-
     const alterarPass = (novaPass: string) => {
-        setPass(novaPass)
+        setPass(novaPass);
     }
 
     const alterarEmail = (novoEmail: string) => {
-        setEmail(novoEmail)
+        setEmail(novoEmail);
     }
 
-    const handleSubmit = async (e: FormEvent) =>{
+    const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
-        try{
-          const response = await fetch(`${apiURL}/auth/cadastro`, {
-            method: 'POST',
-            headers: {'Content-Type':'application/json'},
-            body: JSON.stringify({nome, email, passwd})
-          });
-          console.log(response)
-          if(response){
-            const data = await response.json();
-            const {erro, mensagem, token} = data;
-            console.log(data)
-            if(erro){
-              setError(mensagem)
-            }else{
-              setCookie(undefined, 'reservaToken', token, {
-                maxAge: 60*60*1
-              })
-              route.push('/')
+        setError("");
+        setSuccessMessage("");
+
+        try {
+            const response = await fetch(`${apiURL}/auth/cadastro`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ nome, email, password })
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                const { erro, mensagem, token } = data;
+
+                if (erro) {
+                    setError(mensagem);
+                    setSuccessMessage("");
+                } else {
+                    setSuccessMessage(mensagem);
+                    setError("");
+                    setCookie(undefined, 'reservaToken', token, {
+                        maxAge: 60 * 60 * 1
+                    });
+                    route.push('/');
+                }
+            } else {
+                const data = await response.json();
+                setError(data.mensagem);
+                setSuccessMessage("");
             }
-          }
-        }catch(erro){
-          console.error('Ocorreu um erro ao efetuar a requisição')
+        } catch (erro) {
+            console.error('Ocorreu um erro ao efetuar a requisição', erro);
+            setError("Erro ao realizar o cadastro. Tente novamente.");
+            setSuccessMessage("");
         }
-      }
-    return(
-      <div className="main">
-        <div className="form">
-      <form onSubmit={handleSubmit}>
-          <div className="input">
-              <label htmlFor="nome">Nome: </label>
-              <input 
-                  type="text"
-                  id='nome'
-                  placeholder="Insira Nome Completo"
-                  value={nome}
-                  onChange={(e) => alterarNome(e.target.value)}
-                  />
-          </div>
+    }
 
-          <div className="input">
-              <label htmlFor="email">Email: </label>
-              <input
-                  type="email"
-                  id='email'
-                  placeholder="Insira um Email"
-                  value={email}
-                  onChange={(e) => alterarEmail(e.target.value)}
-                  />
-          </div>
+    return (
+        <div className="main">
+            <div className="form">
+                <form onSubmit={handleSubmit}>
+                    <div className="input">
+                        <label htmlFor="nome">Nome: </label>
+                        <input
+                            type="text"
+                            id='nome'
+                            placeholder="Insira Nome Completo"
+                            value={nome}
+                            onChange={(e) => alterarNome(e.target.value)}
+                        />
+                    </div>
 
-          <div className="input">
-              <label htmlFor="passwd">Senha: </label>
-              <input
-                  type="password"
-                  id='passwd'
-                  placeholder="Insira Senha"
-                  value={passwd}
-                  onChange={(e) => alterarPass(e.target.value)}
-                  />
-          </div>
-        
-          <button className="button" type="submit" onClick={handleSubmit}>Enviar</button>
-      </form>
-      </div>
-  </div>
-    )
-} 
+                    <div className="input">
+                        <label htmlFor="email">Email: </label>
+                        <input
+                            type="email"
+                            id='email'
+                            placeholder="Insira um Email"
+                            value={email}
+                            onChange={(e) => alterarEmail(e.target.value)}
+                        />
+                    </div>
+
+                    <div className="input">
+                        <label htmlFor="password">Senha: </label>
+                        <input
+                            type="password"
+                            id='password'
+                            placeholder="Insira Senha"
+                            value={password}
+                            onChange={(e) => alterarPass(e.target.value)}
+                        />
+                    </div>
+
+                    <button className="button" type="submit">Enviar</button>
+                </form>
+
+                {error && (
+                    <div style={{ color: 'red', marginTop: '10px' }}>
+                        <p>{error}</p>
+                    </div>
+                )}
+
+                {successMessage && (
+                    <div style={{ color: 'green', marginTop: '10px' }}>
+                        <p>{successMessage}</p>
+                    </div>
+                )}
+            </div>
+        </div>
+    );
+}

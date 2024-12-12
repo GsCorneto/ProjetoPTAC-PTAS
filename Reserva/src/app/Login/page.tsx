@@ -1,16 +1,15 @@
 'use client'
 
-// import styles from "../";
+
 import { useEffect, useState, FormEvent } from "react";
 import { useRouter } from 'next/navigation'
-import Button from "../components/Button";
 import { apiURL } from "../config";
 import { setCookie, parseCookies } from "nookies";
 import "../globals.css"
 
 export default function Login() {
   const [email, setEmail] = useState("");
-  const [passwd, setPass] = useState("");
+  const [password, setPass] = useState("");
   const [error, setError] = useState("")
   const route = useRouter();
 
@@ -52,13 +51,22 @@ export default function Login() {
     }
   }, [route]);
 
+  useEffect(() => {
+    const {reservaToken} = parseCookies()
+    if(reservaToken){
+        console.log('Token Present', reservaToken);
+    }else{
+        console.log("Token não encontrado")
+    }
+  }, []);
+
     const handleSubmmit = async (e: FormEvent) =>{
       e.preventDefault();
       try{
         const response = await fetch(`${apiURL}/auth/login`, {
           method: 'POST',
           headers: {'Content-Type':'application/json'},
-          body: JSON.stringify({email, passwd})
+          body: JSON.stringify({email, password})
         });
         if(response){
           const data = await response.json();
@@ -99,7 +107,7 @@ export default function Login() {
           name="senha" 
           id="pass"
           placeholder="Digite sua senha"
-          value={passwd}
+          value={password}
           onChange={(e) => setPass(e.target.value)}
           />
        </div>
@@ -111,7 +119,3 @@ export default function Login() {
       </div>
      );
    } 
-
-
-  
- 

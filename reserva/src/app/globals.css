@@ -1,142 +1,154 @@
-
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f7f7f7;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
-  /* Css da Home.page */
-  .home {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    width: 100%;
-    padding: 20px;
-    max-width: 600px; 
-  }
-
-  .header h1 {
-    font-size: 3rem; 
-    color: #333;
-    margin-bottom: 30px;
-    font-weight: bold;
-    text-transform: uppercase; 
-    letter-spacing: 2px; 
-  }
-
-.navbar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f4f4f4;
-    padding: 10px 0;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f7f7f7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #93d2f0, #0794f1);
 }
 
-  .login-btn-container {
-    margin-top: 20px;
-  }
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  padding: 30px;
+  max-width: 600px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
 
-  .buttonhome {
-    background-color: #007bff;
-    color: white;
-    font-size: 1.2rem;
-    padding: 12px 25px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-  }
+.header h1 {
+  font-size: 3.5rem;
+  color: #333;
+  margin-bottom: 15px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
 
-  .buttonhome :hover {
-    background-color: #0056b3;
-    transform: scale(1.05); 
-  }
-  
-  .buttonhome :focus {
-    outline: none;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-  }
+.header p {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 30px;
+  font-weight: 300;
+}
 
-  /* Css da Login/Cadastrar.page */
-  .main {
-    background-color: #fff;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 400px;
-  }
-  
- 
-  .form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  
- 
-  .input {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .input label {
-    margin-bottom: 8px;
-    font-size: 0.9rem;
-    color: #333;
-  }
-  
-  .input input {
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 1rem;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  }
-  
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 600px;
+  margin-top: 30px;
+}
 
-  .input input:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-    outline: none;
-  }
-  
+.navbar button {
+  background-color: #007bff;
+  color: white;
+  font-size: 1.2rem;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  width: 45%;
+}
 
-  .button {
-    padding: 12px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-  }
-  
-  
-  .button:hover {
-    background-color: #0056b3;
-    transform: scale(1.05);
-  }
-  
- 
-  .buttonlog:focus {
-    outline: none;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-  }
+.navbar button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
 
-  /* CSS ButtonComp */
-  .botaorota {
+.navbar button:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.7);
+}
+
+.botaorota {
+  background-color: #e74c3c;
+}
+
+.botaorota:hover {
+  background-color: #f39c12;
+}
+
+.botaoreserva {
+  background-color: #60ee1e;
+}
+
+.botaoreserva:hover {
+  background-color: #2debab;
+}
+
+.main {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.input {
+  display: flex;
+  flex-direction: column;
+}
+
+.input label {
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.input input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  outline: none;
+}
+
+.button {
+  padding: 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.button:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.botaorota {
   background-color: #e74c3c;
   color: white;
   font-size: 1rem;
@@ -176,4 +188,31 @@ body {
 .botaoreserva:focus {
   outline: none;
   box-shadow: 0 0 5px rgba(255, 213, 26, 0.5);
+}
+
+@media screen and (max-width: 768px) {
+  .home {
+    max-width: 100%;
+    padding: 10px;
+  }
+
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .navbar button {
+    margin-bottom: 20px;
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .header h1 {
+    font-size: 2rem;
+  }
+
+  .header p {
+    font-size: 1rem;
+  }
 }

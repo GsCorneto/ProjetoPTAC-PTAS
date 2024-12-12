@@ -9,11 +9,13 @@ import "../globals.css"
 export default function ReservarM(){
   const [user, setUser] = useState('');
   const [assentos, setNumA] = useState(1);
-
+  const [dia, setHor] = useState("");
+  const route = useRouter();
   const handleSubmit = (e : FormEvent) => {
     e.preventDefault();
     setUser('');
-    setNumA(1);
+    setNumA(0);
+    setHor("")
   };
 
 return(
@@ -40,7 +42,17 @@ return(
             value={assentos}
           />
         </div>
+
+        <div className="input">
+          <label htmlFor="people">Data: </label>
+          <input
+            type="date"
+            id="people"
+            value={dia}
+          />
+        </div>
         <button type="submit" className="button" onClick={handleSubmit} >Confirmar Reserva</button>
+        <button className="botaorota" title ="Efetuar cadastro" onClick ={() => route.push('/Cadastrar')}>Efetuar Cadastro</button>
       </form>
     </div>
   )
