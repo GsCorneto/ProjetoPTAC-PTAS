@@ -10,7 +10,9 @@ import "../globals.css"
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPass] = useState("");
+  const [adminPass, setAdPass] = useState("")
   const [error, setError] = useState("")
+  
   const route = useRouter();
 
   // const response = await fetch(`${apiURL}/auth/login`, {
@@ -111,6 +113,18 @@ export default function Login() {
           onChange={(e) => setPass(e.target.value)}
           />
        </div>
+
+       <div className="input">
+          <label htmlFor="adminCode">Código de Admin (opcional)</label>
+          <input
+            type="text"
+            name="adminCode"
+            id="adminCode"
+            placeholder="Digite o código de admin"
+            value={adminPass}
+            onChange={(e) => setAdPass(e.target.value)}
+          />
+        </div>
 
           <button  className="button" title ="Realizar Login" onClick={handleSubmmit}>Login</button>
            </div>

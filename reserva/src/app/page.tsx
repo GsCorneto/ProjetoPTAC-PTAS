@@ -1,11 +1,21 @@
 'use client'
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from 'next/navigation'
 import "./globals.css"
 
 export default function Home(){
   const router = useRouter()
+
+  useEffect(() => {
+    async function fetchData(){
+      const response = await fetch('http://localhost:3000/reservas')
+      console.log(response)
+    }
+    fetchData()
+  }, [])
+  
+  
   return (
    <div className="home">
    <div className="header">
