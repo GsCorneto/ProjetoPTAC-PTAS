@@ -7,7 +7,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: linear-gradient(135deg, #93d2f0, #0794f1);
+  background: linear-gradient(135deg, #93d2f0, #0759f1, #4409cf);
 }
 
 .home {
@@ -49,7 +49,7 @@ body {
 }
 
 .navbar button {
-  background-color: #007bff;
+  background-color: #5D5E60;
   color: white;
   font-size: 1.2rem;
   padding: 15px 30px;
@@ -61,14 +61,14 @@ body {
 }
 
 .navbar button:hover {
-  background-color: #0056b3;
+  background-color: #36413E;
   transform: scale(1.05);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .navbar button:focus {
   outline: none;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.7);
+  box-shadow: 0 0 5px rgba(7, 61, 119, 0.7);
 }
 
 .botaorota {
@@ -80,11 +80,11 @@ body {
 }
 
 .botaoreserva {
-  background-color: #60ee1e;
+  background-color: #5D5E60;
 }
 
 .botaoreserva:hover {
-  background-color: #2debab;
+  background-color: #36413E;
 }
 
 .main {
@@ -129,7 +129,7 @@ body {
 
 .button {
   padding: 12px;
-  background-color: #007bff;
+  background-color: #5D5E60;
   color: white;
   border: none;
   border-radius: 5px;
@@ -139,7 +139,7 @@ body {
 }
 
 .button:hover {
-  background-color: #0056b3;
+  background-color: #36413E;
   transform: scale(1.05);
 }
 
@@ -149,7 +149,7 @@ body {
 }
 
 .botaorota {
-  background-color: #e74c3c;
+  background-color: #c157ff;
   color: white;
   font-size: 1rem;
   padding: 10px 20px;
@@ -160,7 +160,7 @@ body {
 }
 
 .botaorota:hover {
-  background-color: #f39c12;
+  background-color: #8f32db;
   transform: scale(1.05);
 }
 
@@ -180,15 +180,7 @@ body {
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.botaoreserva:hover {
-  background-color: #2debab;
-  transform: scale(1.05);
-}
 
-.botaoreserva:focus {
-  outline: none;
-  box-shadow: 0 0 5px rgba(255, 213, 26, 0.5);
-}
 
 @media screen and (max-width: 768px) {
   .home {
