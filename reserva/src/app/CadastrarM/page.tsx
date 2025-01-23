@@ -28,7 +28,7 @@ export default function Cadastrar() {
         setSuccessMessage("");
 
         try {
-            const response = await fetch(`${apiURL}/auth/cadastroMesa`, {
+            const response = await fetch(`${apiURL}/mesa/novo`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ codigo, n_lugares  })
@@ -66,7 +66,7 @@ export default function Cadastrar() {
             <div className="form">
                 <form onSubmit={handleSubmit}>
                     <div className="input">
-                        <label htmlFor="nome">Código da Mesa: </label>
+                        <label htmlFor="">Código da Mesa: </label>
                         <input
                             type="text"
                             id='code'
@@ -77,7 +77,7 @@ export default function Cadastrar() {
                     </div>
 
                     <div className="input">
-                        <label htmlFor="email">Número de lugares: </label>
+                        <label htmlFor="nlugar">Número de lugares: </label>
                         <input
                             type="number"
                             id='numl'

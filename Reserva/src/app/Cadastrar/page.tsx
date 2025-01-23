@@ -10,7 +10,6 @@ export default function Cadastrar() {
     const [nome, setNome] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPass] = useState("");
-    const [adminPass, setAdPass] = useState("")
     const [error, setError] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
     const route = useRouter();
@@ -21,10 +20,6 @@ export default function Cadastrar() {
 
     const alterarPass = (novaPass: string) => {
         setPass(novaPass);
-    }
-
-    const alterarAdminPass = (novoAdPass: string) => {
-        setAdPass(novoAdPass);
     }
 
     const alterarEmail = (novoEmail: string) => {
@@ -107,16 +102,6 @@ export default function Cadastrar() {
                         />
                     </div>
 
-                    <div className="input">
-                        <label htmlFor="adminPass">Passe de Admin (Opcional): </label>
-                        <input
-                            type="text"
-                            id='adminPass'
-                            placeholder="Insira o passe de ADM (se aplicável)"
-                            value={adminPass}
-                            onChange={(e) => alterarAdminPass(e.target.value)}
-                        />
-                    </div>
 
                     <button className="button" type="submit">Enviar</button>
                 </form>

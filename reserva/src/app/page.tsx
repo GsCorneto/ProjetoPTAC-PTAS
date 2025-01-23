@@ -27,7 +27,7 @@ export default function Home(){
      <button className="botaorota" title="Efetuar Login" onClick={() => router.push('/Login')}>
        Efetuar Login
      </button>
-     <button className="botaoreserva" title="Efetuar Reserva" onClick={() => router.push('/ReservarM')}>
+     <button className="botaoreserva" title="Ver Mesas" onClick={() => router.push('/Mesas')}>
        Reservar Mesa
      </button>
    </div>

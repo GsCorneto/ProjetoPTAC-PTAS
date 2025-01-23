@@ -115,7 +115,7 @@ export default function Login() {
 
           <button  className="button" title ="Realizar Login" onClick={handleSubmmit}>Login</button>
            </div>
-          <button className="botaorota" title ="Efetuar cadastro" onClick ={() => route.push('/Cadastrar')}>Efetuar Cadastro</button>
+          <button className="botaorota" title ="Efetuar cadastro" onClick ={() => route.push('/Cadastrar')}>Não possui conta?</button>
              
       </div>
      );

@@ -9,7 +9,7 @@ export default function Home(){
 
   useEffect(() => {
     async function fetchData(){
-      const response = await fetch('http://localhost:3000/reservas')
+      const response = await fetch('http://localhost:3000/')
       console.log(response)
     }
     fetchData()
@@ -19,7 +19,7 @@ export default function Home(){
   return (
     <div className="home">
     <header className="header">
-      <h1>Minha Aplicação de Reservas</h1>
+      <h1>Restaurante Almofada</h1>
       <div className="profile">
         <img
           src="/placeholder-profile.png" 
@@ -34,19 +34,19 @@ export default function Home(){
     <nav className="navbar">
       <button
         className="navbar-button"
-        onClick={() => router.push('/ReservarM')}
+        onClick={() => router.push('/')}
       >
         Reservar Mesa
       </button>
       <button
         className="navbar-button"
-        onClick={() => router.push('/CancelarReserva')}
+        onClick={() => router.push('/')}
       >
         Cancelar Reserva
       </button>
       <button
         className="navbar-button"
-        onClick={() => router.push('/ListaReservas')}
+        onClick={() => router.push('/')}
       >
         Lista de Reservas
       </button>
