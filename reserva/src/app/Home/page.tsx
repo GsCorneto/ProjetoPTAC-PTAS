@@ -28,9 +28,9 @@ export default function Home(){
       <nav className="navbar">
         <button
           className="navbar-button"
-          onClick={() => router.push('/ReservarM')}
+          onClick={() => router.push('/Perfil')}
         >
-          Reservar Mesa
+          Ver Perfil
         </button>
         <button
           className="navbar-button"
