@@ -19,38 +19,32 @@ export default function Home(){
   return (
     <div className="home">
     <header className="header">
-      <h1>Restaurante Almofada</h1>
-      <div className="profile">
-        <img
-          src="/placeholder-profile.png" 
-          alt="Foto de perfil"
-          className="profile-pic"
-        />
-        <p>Bem-vindo, Matador de Porco</p>
-      </div>
-    </header>
+        <h1 className="page-title">Restaurante Almofada</h1>
+        <div className="user-info">
+          <p>Bem-vindo, <strong>Usuário</strong>!</p>
+        </div>
+      </header>
 
-  
-    <nav className="navbar">
-      <button
-        className="navbar-button"
-        onClick={() => router.push('/')}
-      >
-        Reservar Mesa
-      </button>
-      <button
-        className="navbar-button"
-        onClick={() => router.push('/')}
-      >
-        Cancelar Reserva
-      </button>
-      <button
-        className="navbar-button"
-        onClick={() => router.push('/')}
-      >
-        Lista de Reservas
-      </button>
-    </nav>
+      <nav className="navbar">
+        <button
+          className="navbar-button"
+          onClick={() => router.push('/ReservarM')}
+        >
+          Reservar Mesa
+        </button>
+        <button
+          className="navbar-button"
+          onClick={() => router.push('/CancelarReserva')}
+        >
+          Cancelar Reserva
+        </button>
+        <button
+          className="navbar-button"
+          onClick={() => router.push('/CancelarReserva')}
+        >
+          Lista de Reservas
+        </button>
+      </nav>
   </div>
    );
 }

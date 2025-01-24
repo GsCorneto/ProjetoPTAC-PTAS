@@ -14,36 +14,6 @@ export default function Login() {
   
   const route = useRouter();
 
-  // const response = await fetch(`${apiURL}/auth/login`, {
-  //   method : 'POST',
-  //   headers :{
-  //     'Content-type' : 'application/json'
-  //   },
-  //   body: 
-  // })
-
-// const teste = [1,2,3,4]
-// const result = teste.find((item) => item = 1)
-
-
-//   const onSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
-//     e.preventDefault()
-//     try{
-//       const response = await fetch('https://prof-jeferson.github.io/API-reservas/usuarios.json')
-//       if (!response){
-//         console.log('Erro ao buscar!')
-//       }
-//       const usuarios = await response.json();
-//       const usuConvert = Usuario[] = usuarios as Usuario[]
-//       const user = usuarios.find((user) => user.email == email && user.password == password )
-//       localStorage.setItem('usuario', JSON.stringify(user))
-
-//       console.log(usuarios)
-//     }catch{
-        
-//     }
-//   }
-
   useEffect(() => {
     const {'reservaToken' : token} = parseCookies()
     if(token){
@@ -120,3 +90,34 @@ export default function Login() {
       </div>
      );
    } 
+
+
+   // const response = await fetch(`${apiURL}/auth/login`, {
+  //   method : 'POST',
+  //   headers :{
+  //     'Content-type' : 'application/json'
+  //   },
+  //   body: 
+  // })
+
+// const teste = [1,2,3,4]
+// const result = teste.find((item) => item = 1)
+
+
+//   const onSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
+//     e.preventDefault()
+//     try{
+//       const response = await fetch('https://prof-jeferson.github.io/API-reservas/usuarios.json')
+//       if (!response){
+//         console.log('Erro ao buscar!')
+//       }
+//       const usuarios = await response.json();
+//       const usuConvert = Usuario[] = usuarios as Usuario[]
+//       const user = usuarios.find((user) => user.email == email && user.password == password )
+//       localStorage.setItem('usuario', JSON.stringify(user))
+
+//       console.log(usuarios)
+//     }catch{
+        
+//     }
+//   }
