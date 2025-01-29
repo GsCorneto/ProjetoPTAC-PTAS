@@ -40,9 +40,9 @@ export default function Home(){
         </button>
         <button
           className="navbar-button"
-          onClick={() => router.push('/CadastrarM')}
+          onClick={() => router.push('Mesas')}
         >
-          Cadastrar Mesa
+          Mesa
         </button>
       </nav>
   </div>

@@ -271,3 +271,30 @@ body {
     max-width: 100%;
   }
 }
+
+
+.botaocancell {
+  background-color: #ff4d4d; /* Vermelho vibrante */
+  color: white; /* Texto branco */
+  border: none; /* Remove a borda padrão */
+  padding: 10px 20px; /* Espaçamento interno */
+  border-radius: 5px; /* Bordas arredondadas */
+  font-size: 14px; /* Tamanho da fonte */
+  font-weight: bold; /* Texto em negrito */
+  cursor: pointer; /* Cursor de ponteiro ao passar o mouse */
+  transition: background-color 0.3s ease; /* Transição suave de cor */
+  margin-top: 10px; /* Espaçamento acima do botão */
+}
+
+.botaocancell:hover {
+  background-color: #e60000; /* Vermelho mais escuro ao passar o mouse */
+}
+
+.botaocancell:active {
+  background-color: #cc0000; /* Vermelho ainda mais escuro ao clicar */
+}
+
+.botaocancell:focus {
+  outline: none; /* Remove o contorno padrão ao focar */
+  box-shadow: 0 0 0 3px rgba(255, 77, 77, 0.5); /* Sombra ao focar */
+}

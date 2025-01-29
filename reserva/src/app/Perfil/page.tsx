@@ -1,20 +1,20 @@
-'use client'
+'use client';
 
 import { useEffect, useState, FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { apiURL } from "../config";
 import { parseCookies } from "nookies";
 import "../globals.css";
+import Usuario from "../interfaces/usuario";
 
 export default function Perfil() {
-  const [id, setId] = useState("");
+  const [usuario, setUsuario] = useState<Usuario | null>(null);
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
-  const [tipo, setTipo] = useState("");
+  const [tipo, setTipo] = useState<"cliente" | "adm">("cliente");
   const [error, setError] = useState("");
-  const [perfil, setPerfil] = useState<any>(null);
-
-  const route = useRouter();
+  const [successMessage, setSuccessMessage] = useState("");
+  const router = useRouter();
 
   useEffect(() => {
     const verPerfil = async () => {
@@ -30,14 +30,16 @@ export default function Perfil() {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-             Authorization: `Bearer ${reservaToken}`, 
+            Authorization: `Bearer ${reservaToken}`,
           },
         });
 
         if (response.ok) {
           const data = await response.json();
-          setPerfil(data.usuario); 
-          setId(data.usuario.id);
+          setUsuario(data.usuario);
+          setNome(data.usuario.nome);
+          setEmail(data.usuario.email);
+          setTipo(data.usuario.tipo);
         } else {
           const errorData = await response.json();
           setError(errorData.mensagem || "Erro ao carregar perfil.");
@@ -51,33 +53,35 @@ export default function Perfil() {
     verPerfil();
   }, []);
 
-    const attPerfil = async (e: FormEvent) => {
+  const attPerfil = async (e: FormEvent) => {
     e.preventDefault();
 
     try {
-        const { reservaToken } = parseCookies();
-        if (!reservaToken) {
-         setError("Token não encontrado. Por favor, faça login novamente.");
-          return;
-        }
+      const { reservaToken } = parseCookies();
+      if (!reservaToken) {
+        setError("Token não encontrado. Por favor, faça login novamente.");
+        return;
+      }
 
-    const response = await fetch(`${apiURL}/perfil`, {
+      const response = await fetch(`${apiURL}/perfil`, {
         method: "PATCH",
-        headers: { "Content-Type": "application/json",
-                Authorization: `Bearer ${reservaToken}`
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${reservaToken}`,
         },
-        body: JSON.stringify({ id, nome, email, tipo }),
+        body: JSON.stringify({ nome, email, tipo }),
       });
 
-    if (response.ok) {
-    const data = await response.json();
-        setPerfil(data.usuario); 
-        alert("Perfil atualizado com sucesso!");
-    }else {
-    const errorData = await response.json();
+      if (response.ok) {
+        const data = await response.json();
+        setUsuario(data.usuario);
+        setSuccessMessage("Perfil atualizado com sucesso!");
+        setError("");
+      } else {
+        const errorData = await response.json();
         setError(errorData.mensagem || "Erro ao atualizar perfil.");
       }
-    }catch (err) {
+    } catch (err) {
       console.error("Erro ao atualizar perfil:", err);
       setError("Erro de conexão com o servidor.");
     }
@@ -87,13 +91,14 @@ export default function Perfil() {
     <div className="main">
       <div className="form">
         {error && <p style={{ color: "red" }}>{error}</p>}
+        {successMessage && <p style={{ color: "green" }}>{successMessage}</p>}
 
-        {perfil ? (
+        {usuario ? (
           <div>
             <h3>Informações do Perfil</h3>
-            <p>Nome: {perfil.nome}</p>
-            <p>Email: {perfil.email}</p>
-            <p>Tipo: {perfil.tipo}</p>
+            <p>Nome: {usuario.nome}</p>
+            <p>Email: {usuario.email}</p>
+            <p>Tipo: {usuario.tipo}</p>
           </div>
         ) : (
           <p>Carregando perfil...</p>
@@ -112,12 +117,13 @@ export default function Perfil() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <input
-            type="text"
-            placeholder="Tipo"
+          <select
             value={tipo}
-            onChange={(e) => setTipo(e.target.value)}
-          />
+            onChange={(e) => setTipo(e.target.value as "cliente" | "adm")}
+          >
+            <option value="cliente">Cliente</option>
+            <option value="adm">Administrador</option>
+          </select>
           <button type="submit">Atualizar Perfil</button>
         </form>
       </div>

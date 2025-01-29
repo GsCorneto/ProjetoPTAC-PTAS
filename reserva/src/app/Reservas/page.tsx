@@ -93,7 +93,7 @@ export default function Reserva() {
                 <p>Data: {new Date(reserva.data).toLocaleDateString("pt-br")}</p>
                 <p>Num. Pessoas: {reserva.n_pessoas}</p>
                 <p>Mesa: {reserva.mesa.codigo}</p>
-                <button onClick={() => cancelarReserva(reserva.Id)}>
+                <button className ="botaocancell"onClick={() => cancelarReserva(reserva.Id)}>
                   Cancelar Reserva
                 </button>
               </div>
