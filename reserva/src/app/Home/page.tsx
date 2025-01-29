@@ -30,19 +30,19 @@ export default function Home(){
           className="navbar-button"
           onClick={() => router.push('/Perfil')}
         >
-          Ver Perfil
+         Perfil
         </button>
         <button
           className="navbar-button"
-          onClick={() => router.push('/CancelarReserva')}
+          onClick={() => router.push('/Reservas')}
         >
-          Cancelar Reserva
+          Reservas
         </button>
         <button
           className="navbar-button"
-          onClick={() => router.push('/CancelarReserva')}
+          onClick={() => router.push('/CadastrarM')}
         >
-          Lista de Reservas
+          Cadastrar Mesa
         </button>
       </nav>
   </div>
