@@ -1,5 +1,5 @@
 interface Reservas{
-    id: number,
+    Id: number,
     usuario_id: number,
     mesa_id: number,
     n_pessoas: number,
