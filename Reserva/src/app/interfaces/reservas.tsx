@@ -3,7 +3,11 @@ interface Reservas{
     usuario_id: number,
     mesa_id: number,
     n_pessoas: number,
-    status: boolean,
+    mesa: {
+        id: string,
+        codigo: string,
+        n_lugares: number
+    },
 }
 
 

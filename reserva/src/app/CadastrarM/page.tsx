@@ -58,7 +58,9 @@ export default function Cadastrar() {
             }
             const response = await fetch(`${apiURL}/mesa/novo`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${reservaToken}` },
+                headers: {
+                    'Content-Type': 'application/json', 
+                    'Authorization': `Bearer ${reservaToken}` },
                 body: JSON.stringify({ codigo, n_lugares: nn_lugares }),
             });
 
@@ -103,7 +105,7 @@ export default function Cadastrar() {
                             placeholder="Insira Código da Mesa"
                             value={codigo}
                             onChange={(e) => alterarCode(e.target.value)}
-                            maxLength={2}
+                            maxLength={2} 
                         />
                     </div>
 

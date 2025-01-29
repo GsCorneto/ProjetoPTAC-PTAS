@@ -110,6 +110,7 @@ body {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   width: 100%;
   max-width: 400px;
+  margin: 0 auto;
 }
 
 .form {
@@ -222,5 +223,51 @@ body {
 
   .header p {
     font-size: 1rem;
+  }
+}
+
+
+
+.reservas-lista {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.reserva-item {
+  border: 1px solid #ccc;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  flex: 1 1 calc(30% - 20px); /* Deixa os cards com tamanho fixo em telas maiores */
+  max-width: calc(30% - 20px); 
+  box-sizing: border-box;
+  text-align: center;
+  word-wrap: break-word; 
+  overflow-wrap: break-word;
+}
+
+.reserva-item h3 {
+  margin: 5px 0;
+  font-size: 0.95em;
+}
+
+.reserva-item p {
+  margin: 5px 0;
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+  .reserva-card {
+    flex: 1 1 calc(50% - 20px); /* 2 cards por linha em telas menores */
+    max-width: calc(50% - 20px);
+  }
+}
+
+@media (max-width: 480px) {
+  .reserva-card {
+    flex: 1 1 100%; /* 1 card por linha em telas muito pequenas */
+    max-width: 100%;
   }
 }

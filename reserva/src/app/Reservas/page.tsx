@@ -5,14 +5,12 @@ import { useRouter } from "next/navigation";
 import { apiURL } from "../config";
 import { parseCookies } from "nookies";
 import "../globals.css";
+import Reservas from "../interfaces/reservas";
 
-export default function Reservas() {
-  const [id, setId] = useState("");
-  const [nome, setNome] = useState("");
-  const [email, setEmail] = useState("");
-  const [tipo, setTipo] = useState("");
-  const [error, setError] = useState("");
-  const [perfil, setPerfil] = useState<any>(null);
+export default function Reserva() {
+ const [reservas, setReservas] = useState<Reservas>([]);
+ const [error, setError] = useState("");
+ const router = useRouter();
 
   const route = useRouter();
 
@@ -36,90 +34,41 @@ export default function Reservas() {
 
         if (response.ok) {
           const data = await response.json();
-          setPerfil(data.usuario); 
-          setId(data.usuario.id);
+          setReservas(data.reservas); 
         } else {
           const errorData = await response.json();
-          setError(errorData.mensagem || "Erro ao carregar perfil.");
+          setError(errorData.mensagem || "ERRO ao carregar as reservas");
         }
       } catch (err) {
-        console.error("Erro ao carregar perfil:", err);
+        console.error("Erro ao carregar suas reservas:", err);
         setError("Erro de conexão com o servidor.");
       }
     };
 
-    verPerfil();
-  }, []);
+    verReservas();
+  }, [router]);
 
-    const attPerfil = async (e: FormEvent) => {
-    e.preventDefault();
-
-    try {
-        const { reservaToken } = parseCookies();
-        if (!reservaToken) {
-         setError("Token não encontrado. Por favor, faça login novamente.");
-          return;
-        }
-
-    const response = await fetch(`${apiURL}/perfil`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json",
-                Authorization: `Bearer ${reservaToken}`
-        },
-        body: JSON.stringify({ id, nome, email, tipo }),
-      });
-
-    if (response.ok) {
-    const data = await response.json();
-        setPerfil(data.usuario); 
-        alert("Perfil atualizado com sucesso!");
-    }else {
-    const errorData = await response.json();
-        setError(errorData.mensagem || "Erro ao atualizar perfil.");
-      }
-    }catch (err) {
-      console.error("Erro ao atualizar perfil:", err);
-      setError("Erro de conexão com o servidor.");
-    }
-  };
+  ;
 
   return (
     <div className="main">
       <div className="form">
         {error && <p style={{ color: "red" }}>{error}</p>}
 
-        {perfil ? (
-          <div>
-            <h3>Informações do Perfil</h3>
-            <p>Nome: {perfil.nome}</p>
-            <p>Email: {perfil.email}</p>
-            <p>Tipo: {perfil.tipo}</p>
+        {reservas? (
+          <div className="reservas-lista">
+            {reservas.map((reserva) =>(
+              <div className="reserva-item" key={reserva.id}>
+                <h3>Reserva {reserva.id}</h3>
+                <p>Data: {new Date(reserva.data).toLocaleDateString('pt-br')}</p>
+                <p>Num.Pessoas : {reserva.n_pessoas}</p>
+                <p>Mesa: {reserva.mesa.codigo}</p>
+             </div>
+            ))}
           </div>
         ) : (
-          <p>Carregando perfil...</p>
+          <p>Nenhuma reserva ainda</p>
         )}
-
-        <form onSubmit={attPerfil}>
-          <input
-            type="text"
-            placeholder="Nome"
-            value={nome}
-            onChange={(e) => setNome(e.target.value)}
-          />
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="Tipo"
-            value={tipo}
-            onChange={(e) => setTipo(e.target.value)}
-          />
-          <button type="submit">Atualizar Perfil</button>
-        </form>
       </div>
     </div>
   );
