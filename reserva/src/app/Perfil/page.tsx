@@ -117,13 +117,6 @@ export default function Perfil() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <select
-            value={tipo}
-            onChange={(e) => setTipo(e.target.value as "cliente" | "adm")}
-          >
-            <option value="cliente">Cliente</option>
-            <option value="adm">Administrador</option>
-          </select>
           <button type="submit">Atualizar Perfil</button>
         </form>
       </div>

@@ -28,7 +28,7 @@ export default function Home(){
        Efetuar Login
      </button>
      <button className="botaoreserva" title="Ver Mesas" onClick={() => router.push('/Mesas')}>
-       Reservar Mesa
+       Ver Mesas
      </button>
    </div>
  </div>

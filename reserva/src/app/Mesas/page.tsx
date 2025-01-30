@@ -5,16 +5,19 @@ import { useRouter } from "next/navigation";
 import { apiURL } from "../config";
 import { parseCookies } from "nookies";
 import "../globals.css";
-import Reservas from "../interfaces/reservas";
+import Mesas from "../interfaces/mesas";
 
-export default function Reserva() {
-  const [reservas, setReservas] = useState<Reservas[]>([])
+export default function Perfil() {
+  const [mesas, setMesas] = useState<Mesas | null>(null);
+  const [id, setId] = useState("");
+  const [codigo, setEmail] = useState("");
+  const [n_lugares, setLugar] = useState(0);
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const router = useRouter();
 
   useEffect(() => {
-    const verReservas = async () => {
+    const verPerfil = async () => {
       try {
         const { reservaToken } = parseCookies();
         if (!reservaToken) {
@@ -23,7 +26,7 @@ export default function Reserva() {
           return;
         }
 
-        const response = await fetch(`${apiURL}/reservas`, {
+        const response = await fetch(`${apiURL}/perfil`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -33,21 +36,23 @@ export default function Reserva() {
 
         if (response.ok) {
           const data = await response.json();
-          setReservas(data.reservas);
+          
         } else {
           const errorData = await response.json();
-          setError(errorData.mensagem || "Erro ao carregar as reservas.");
+          setError(errorData.mensagem || "Erro ao carregar perfil.");
         }
       } catch (err) {
-        console.error("Erro ao carregar suas reservas:", err);
+        console.error("Erro ao carregar perfil:", err);
         setError("Erro de conexão com o servidor.");
       }
     };
 
-    verReservas();
-  }, [router]);
+    verPerfil();
+  }, []);
 
-  const cancelarReserva = async (reservaId: number) => {
+  const attPerfil = async (e: FormEvent) => {
+    e.preventDefault();
+
     try {
       const { reservaToken } = parseCookies();
       if (!reservaToken) {
@@ -55,25 +60,26 @@ export default function Reserva() {
         return;
       }
 
-      const response = await fetch(`${apiURL}/reservas`, {
-        method: "DELETE",
+      const response = await fetch(`${apiURL}/perfil`, {
+        method: "PATCH",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${reservaToken}`,
         },
-        body: JSON.stringify({ reservaId }),
+        body: JSON.stringify({ }),
       });
 
       if (response.ok) {
-        setSuccessMessage("Reserva cancelada com sucesso!");
+        const data = await response.json();
+       
+        setSuccessMessage("Perfil atualizado com sucesso!");
         setError("");
-        setReservas(reservas.filter((reserva) => reserva.Id ));
       } else {
         const errorData = await response.json();
-        setError(errorData.mensagem || "Erro ao cancelar a reserva.");
+        setError(errorData.mensagem || "Erro ao atualizar perfil.");
       }
     } catch (err) {
-      console.error("Erro ao cancelar reserva:", err);
+      console.error("Erro ao atualizar perfil:", err);
       setError("Erro de conexão com o servidor.");
     }
   };
@@ -84,24 +90,7 @@ export default function Reserva() {
         {error && <p style={{ color: "red" }}>{error}</p>}
         {successMessage && <p style={{ color: "green" }}>{successMessage}</p>}
 
-        {reservas.length > 0 ? (
-          <div className="reservas-lista">
-            {reservas.map((reserva) => (
-              <div className="reserva-item" key={reserva.Id}>
-                <h3>Reserva {reserva.Id}</h3>
-                <p>Data: {new Date(reserva.data).toLocaleDateString("pt-br")}</p>
-                <p>Num. Pessoas: {reserva.n_pessoas}</p>
-                <p>Mesa: {reserva.mesa.codigo}</p>
-                <button className ="botaocancell"onClick={() => cancelarReserva(reserva.Id)}>
-                  Cancelar Reserva
-                </button>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p>Nenhuma reserva ainda.</p>
-        )}
-        <button className="botaorota" title ="Efetuar reserva" onClick ={() => router.push('/Reservar')}>Reservar Mesa</button>
+          <button type="submit">Atualizar Perfil</button>
       </div>
     </div>
   );

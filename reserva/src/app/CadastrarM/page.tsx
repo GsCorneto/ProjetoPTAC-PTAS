@@ -7,7 +7,7 @@ import { parseCookies, setCookie } from "nookies";
 import "../globals.css"
 
 
-export default function Cadastrar() {
+export default function CadastrarM() {
     const [codigo, setCode] = useState("");
     const [n_lugares, setLugar] = useState("");
     const [error, setError] = useState("");
