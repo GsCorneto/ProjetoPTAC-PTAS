@@ -83,8 +83,8 @@ export default function CadastrarM() {
             } else {
                 setError(data.mensagem || "Erro ao cadastrar a mesa.");
                 setSuccessMessage("");
-                console.log("N-Lugares ->" + n_lugares + " Código ->" + codigo);
-                console.log("URL da requisição:", `${apiURL}/mesa/novo`);
+                //console.log("N-Lugares ->" + n_lugares + " Código ->" + codigo);
+                //console.log("URL da requisição:", `${apiURL}/mesa/novo`);
             }
         } catch (erro) {
             console.error('Ocorreu um erro ao efetuar a requisição', erro);

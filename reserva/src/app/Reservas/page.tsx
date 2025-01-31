@@ -85,9 +85,9 @@ export default function Reserva() {
         {successMessage && <p style={{ color: "green" }}>{successMessage}</p>}
 
         {reservas.length > 0 ? (
-          <div className="reservas-lista">
+          <div className="lista">
             {reservas.map((reserva) => (
-              <div className="reserva-item" key={reserva.Id}>
+              <div className="item" key={reserva.Id}>
                 <h3>Reserva {reserva.Id}</h3>
                 <p>Data: {new Date(reserva.data).toLocaleDateString("pt-br")}</p>
                 <p>Num. Pessoas: {reserva.n_pessoas}</p>

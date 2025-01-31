@@ -14,14 +14,13 @@ export default function Home(){
     }
     fetchData()
   }, [])
-  
-  
+   
   return (
     <div className="home">
     <header className="header">
         <h1 className="page-title">Restaurante Almofada</h1>
         <div className="user-info">
-          <p>Bem-vindo, <strong>Usuário</strong>!</p>
+          <p><strong>Bem-vindo!</strong></p>
         </div>
       </header>
 
@@ -42,7 +41,7 @@ export default function Home(){
           className="navbar-button"
           onClick={() => router.push('Mesas')}
         >
-          Mesa
+           Mesa
         </button>
       </nav>
   </div>

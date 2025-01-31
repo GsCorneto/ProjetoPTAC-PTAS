@@ -105,19 +105,27 @@ export default function Perfil() {
         )}
 
         <form onSubmit={attPerfil}>
+          <div className="input">
+            <label htmlFor="nome">Novo Nome</label>
           <input
             type="text"
             placeholder="Nome"
             value={nome}
             onChange={(e) => setNome(e.target.value)}
           />
+          </div>
+
+          <div className="input">
+            <label htmlFor="email">Novo E-mail</label>
           <input
             type="email"
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <button type="submit">Atualizar Perfil</button>
+          </div>
+          
+          <button className="button" type="submit">Atualizar Perfil</button>
         </form>
       </div>
     </div>

@@ -1,12 +1,11 @@
-body {
+body, html {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
   background-color: #f7f7f7;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  height: 100%;
+  overflow-y: auto; 
+  overflow-x: hidden; 
   background: linear-gradient(135deg, #93d2f0, #0759f1, #4409cf);
 }
 
@@ -22,6 +21,7 @@ body {
   background-color: white;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
 }
 
 .header {
@@ -226,75 +226,87 @@ body {
   }
 }
 
-
-
-.reservas-lista {
+.lista {
   display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
+  flex-wrap: wrap; /* Permite que os itens quebrem para a próxima linha */
+  gap: 20px; /* Espaço entre os itens */
+  justify-content: center; /* Centraliza os itens horizontalmente */
+  padding: 20px;
+  list-style: none; /* Remove os bullets */
+  margin: 0;
 }
 
-.reserva-item {
-  border: 1px solid #ccc;
-  padding: 15px;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-  flex: 1 1 calc(30% - 20px); /* Deixa os cards com tamanho fixo em telas maiores */
-  max-width: calc(30% - 20px); 
-  box-sizing: border-box;
+.item {
+  flex: 1 1 calc(25% - 20px); /* Cada item ocupa até 25% da largura disponível, menos o gap */
+  max-width: calc(25% - 20px); /* Limita a largura máxima para 25% */
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #ffffff;
   text-align: center;
-  word-wrap: break-word; 
-  overflow-wrap: break-word;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.reserva-item h3 {
+.item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.item strong {
+  display: block;
+  font-size: 0.9rem;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.item p {
+  font-size: 0.8rem;
+  color: #555;
   margin: 5px 0;
-  font-size: 0.95em;
 }
 
-.reserva-item p {
-  margin: 5px 0;
-}
-
-/* Responsividade para telas menores */
+/* Responsividade */
 @media (max-width: 768px) {
-  .reserva-card {
-    flex: 1 1 calc(50% - 20px); /* 2 cards por linha em telas menores */
+  .item {
+    flex: 1 1 calc(50% - 20px); /* 2 itens por linha em telas menores */
     max-width: calc(50% - 20px);
   }
 }
 
 @media (max-width: 480px) {
-  .reserva-card {
-    flex: 1 1 100%; /* 1 card por linha em telas muito pequenas */
+  .item {
+    flex: 1 1 100%; /* 1 item por linha em telas muito pequenas */
     max-width: 100%;
   }
 }
 
 
+
+
+
 .botaocancell {
-  background-color: #ff4d4d; /* Vermelho vibrante */
-  color: white; /* Texto branco */
-  border: none; /* Remove a borda padrão */
-  padding: 10px 20px; /* Espaçamento interno */
-  border-radius: 5px; /* Bordas arredondadas */
-  font-size: 14px; /* Tamanho da fonte */
-  font-weight: bold; /* Texto em negrito */
-  cursor: pointer; /* Cursor de ponteiro ao passar o mouse */
-  transition: background-color 0.3s ease; /* Transição suave de cor */
-  margin-top: 10px; /* Espaçamento acima do botão */
+  background-color: #ff4d4d; 
+  color: white; 
+  border: none; 
+  padding: 10px 20px; 
+  border-radius: 5px;
+  font-size: 14px; 
+  font-weight: bold; 
+  cursor: pointer; 
+  transition: background-color 0.3s ease; 
+  margin-top: 10px; 
 }
 
 .botaocancell:hover {
-  background-color: #e60000; /* Vermelho mais escuro ao passar o mouse */
+  background-color: #e60000; 
 }
 
 .botaocancell:active {
-  background-color: #cc0000; /* Vermelho ainda mais escuro ao clicar */
+  background-color: #cc0000; 
 }
 
 .botaocancell:focus {
-  outline: none; /* Remove o contorno padrão ao focar */
+  outline: none; 
   box-shadow: 0 0 0 3px rgba(255, 77, 77, 0.5); /* Sombra ao focar */
 }
