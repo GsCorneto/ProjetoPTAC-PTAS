@@ -9,9 +9,10 @@ import Reservas from "../interfaces/reservas";
 
 export default function Reserva() {
   const [reservas, setReservas] = useState<Reservas[]>([])
-  const [error, setError] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
-  const router = useRouter();
+  const [data, setData] = useState("")
+  const [error, setError] = useState("")
+  const [successMessage, setSuccessMessage] = useState("")
+  const router = useRouter()
 
   useEffect(() => {
     const verReservas = async () => {
@@ -47,6 +48,45 @@ export default function Reserva() {
     verReservas();
   }, [router]);
 
+  const reservasPDATA = async (e: FormEvent) =>{
+    e.preventDefault();
+    if(!data){
+      setError("Insira uma data válida")
+    }
+    const dataCheck = /^\d{4}-\d{2}-\d{2}$/;
+    if (!dataCheck.test(data)) {
+      setError("Data inválida. Use o formato yyyy-mm-dd.");
+      return;
+    }
+
+    try{
+      const response = await fetch(`${apiURL}/reservas/list?data=${data}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+
+      if (response.ok) {
+        const data = await response.json()
+ 
+        if (data.reservas.length === 0){
+         setError("Não há reservas para esta data")
+         setReservas([]);
+        }
+         setReservas(data.reservas);
+         setSuccessMessage("Reservas para esta data")
+       } else {
+         const errorData = await response.json()
+         setError(errorData.mensagem || "Erro ao buscar reservas");
+       }
+     } catch (err) {
+       console.error("Erro ao buscar reservas: ", err)
+       setError("Erro de conexão com o servidor.");
+     }
+
+    }
+
   const cancelarReserva = async (reservaId: number) => {
     try {
       const { reservaToken } = parseCookies();
@@ -81,9 +121,20 @@ export default function Reserva() {
   return (
     <div className="main">
       <div className="form">
+        <form onSubmit={reservasPDATA}>
+          <div className="input">
+            <label htmlFor="data">Data para Busca: </label>
+            <input
+              type="date"
+              id="data"
+              value={data}
+              onChange={(e) => setData(e.target.value)}
+            />
+          </div>
+          <button className="button" type="submit">Buscar</button>
+        </form>
         {error && <p style={{ color: "red" }}>{error}</p>}
         {successMessage && <p style={{ color: "green" }}>{successMessage}</p>}
-
         {reservas.length > 0 ? (
           <div className="lista">
             {reservas.map((reserva) => (
