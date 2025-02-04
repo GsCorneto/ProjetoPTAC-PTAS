@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { useState, FormEvent, useEffect } from "react";
 import { useRouter } from 'next/navigation';
@@ -8,11 +8,11 @@ import "../globals.css";
 
 export default function Reservar() {
     const [dia, setDia] = useState("");
-    const [n_pess, setPess] = useState(0);
-    const [codigo, setCodigo] = useState("");
+    const [n_pess, setPess] = useState(1);
+    const [mesaId, setMesaId] = useState<number | null>(null);
     const [error, setError] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
-    
+
     const router = useRouter();
 
     useEffect(() => {
@@ -20,27 +20,27 @@ export default function Reservar() {
         if (!reservaToken) {
             console.error("Token não encontrado.");
             setError("Token não encontrado.");
+            router.push("/Login")
         }
-    }, []);
+    }, [router]);
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
         setError("");
         setSuccessMessage("");
-        if(!dia){
-            setError("Insira uma data válida")
-        }
-        const dataCheck = /^\d{4}-\d{2}-\d{2}$/;
 
-        if (!dataCheck.test(dia)) {
-            setError("Data inválida. Use o formato yyyy-mm-dd.");
+        if (!dia) {
+            setError("Selecione uma data válida.");
             return;
         }
+        const diaFormatado = new Date(dia).toISOString().split('T')[0]
+
         if (n_pess < 1 || n_pess > 6) {
-            setError("O número de pessoas deve estar entre 1 e 6."); 
+            setError("O número de pessoas deve estar entre 1 e 6.");
             return;
         }
-        if (!codigo) {
+
+        if (!mesaId || isNaN(mesaId)) {
             setError("Código da mesa inválido.");
             return;
         }
@@ -52,13 +52,15 @@ export default function Reservar() {
                 return;
             }
 
+            console.log("Enviando para API:", { data: diaFormatado, n_pess, mesaId });
+
             const response = await fetch(`${apiURL}/reservas/novo`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${reservaToken}`
                 },
-                body: JSON.stringify({ dia, n_pess, codigo }),
+                body: JSON.stringify({ data: diaFormatado, n_pessoas: n_pess, mesaId }),
             });
 
             const data = await response.json();
@@ -95,7 +97,6 @@ export default function Reservar() {
                             id="data"
                             value={dia}
                             onChange={(e) => setDia(e.target.value)}
-                            placeholder="yyyy-mm-dd"
                             required
                         />
                     </div>
@@ -105,10 +106,8 @@ export default function Reservar() {
                         <input
                             type="number"
                             id="n_pessoas"
-                            placeholder="Insira o número de pessoas"
                             value={n_pess}
                             onChange={(e) => setPess(Number(e.target.value))}
-                            min={1}
                             max={6}
                         />
                     </div>
@@ -118,9 +117,9 @@ export default function Reservar() {
                         <input
                             type="number"
                             id="mesaId"
-                            placeholder="Insira o Código da mesa"
-                            value={codigo}
-                            onChange={(e) => setCodigo(e.target.value)}
+                            value={mesaId || ""}
+                            onChange={(e) => setMesaId(Number(e.target.value))}
+                            required
                         />
                     </div>
 
@@ -129,18 +128,15 @@ export default function Reservar() {
                     </button>
                 </form>
 
-                {error && (
-                    <div style={{ color: 'red', marginTop: '10px' }}>
-                        <p>{error}</p>
-                    </div>
-                )}
-
-                {successMessage && (
-                    <div style={{ color: 'green', marginTop: '10px' }}>
-                        <p>{successMessage}</p>
-                    </div>
-                )}
+                {error && <Message message={error} type="error" />}
+                {successMessage && <Message message={successMessage} type="success" />}
             </div>
         </div>
     );
 }
+
+const Message = ({ message, type }: { message: string; type: "error" | "success" }) => (
+    <div style={{ color: type === "error" ? "red" : "green", marginTop: "10px" }}>
+        <p>{message}</p>
+    </div>
+);
